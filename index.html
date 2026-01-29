@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth"> <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/src/styles/style.css">
+    <title>Helixpace // Onboarding</title>
+</head>
+<body class="bg-white text-helix-dark antialiased min-h-screen flex flex-col relative">
+
+    <div class="fixed top-0 right-0 w-[800px] h-[800px] bg-pale-sky/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 z-0 pointer-events-none"></div>
+    <div class="fixed bottom-0 left-0 w-[600px] h-[600px] bg-tech-blue/5 rounded-full blur-3xl translate-y-1/3 -translate-x-1/4 z-0 pointer-events-none"></div>
+
+    <nav class="w-full h-20 flex items-center justify-between px-6 md:px-12 max-w-7xl mx-auto z-10 relative shrink-0">
+        <a href="#" class="font-bold tracking-tight text-xl text-helix-dark hover:text-tech-blue transition-colors">
+            Helixpace
+        </a>
+        
+        <div class="flex items-center gap-6">
+            <a href="/pages/login/index.html" class="text-sm font-medium text-slate-500 hover:text-tech-blue transition-colors">Log In</a>
+            <a href="/pages/login/index.html" class="h-10 px-6 bg-helix-dark text-white text-sm font-semibold rounded-md hover:bg-tech-blue transition-all flex items-center shadow-lg shadow-slate-900/10">
+                Get Access
+            </a>
+        </div>
+    </nav>
+
+    <main class="flex-1 flex flex-col items-center justify-center px-6 relative z-10 text-center max-w-4xl mx-auto pt-16 pb-24">
+        
+        <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight text-helix-dark mb-6 leading-[1.1]">
+            Sequence DNA with <br>
+            <span class="text-tech-blue">clinical precision.</span>
+        </h1>
+
+        <p class="text-lg text-slate-500 max-w-2xl mb-10 leading-relaxed">
+            The standard terminal for batch processing, validation, and storage of nucleotide sequences. Built for modern labs.
+        </p>
+
+        <div class="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
+            <a href="/pages/login/index.html" class="h-14 px-8 w-full sm:w-auto bg-tech-blue text-white font-semibold rounded-lg hover:bg-pale-sky hover:text-tech-blue transition-all shadow-xl shadow-blue-500/20 flex items-center justify-center gap-2 group text-lg">
+                Start Sequencing
+                <span class="material-symbols-sharp group-hover:translate-x-1 transition-transform">arrow_forward</span>
+            </a>
+            
+            <a href="#faq" class="h-14 px-8 w-full sm:w-auto bg-white text-slate-600 font-semibold rounded-lg border border-slate-200 hover:border-tech-blue hover:text-tech-blue transition-all flex items-center justify-center gap-2 group cursor-pointer">
+                <span class="material-symbols-sharp text-slate-400 group-hover:text-tech-blue transition-colors">menu_book</span>
+                About DNAs
+            </a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-24 w-full text-left">
+            <div class="p-6 bg-white/60 backdrop-blur-sm rounded-xl border border-slate-100 shadow-sm hover:shadow-md transition-all hover:border-pale-sky group">
+                <div class="w-10 h-10 bg-pale-sky/20 text-tech-blue rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                    <span class="material-symbols-sharp">verified</span>
+                </div>
+                <h3 class="font-bold text-helix-dark mb-2">Instant Validation</h3>
+                <p class="text-sm text-slate-500">Real-time scrubbing of ATGC inputs prevents errors before processing begins.</p>
+            </div>
+
+            <div class="p-6 bg-white/60 backdrop-blur-sm rounded-xl border border-slate-100 shadow-sm hover:shadow-md transition-all hover:border-pale-sky group">
+                <div class="w-10 h-10 bg-pale-sky/20 text-tech-blue rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                    <span class="material-symbols-sharp">database</span>
+                </div>
+                <h3 class="font-bold text-helix-dark mb-2">Secure Storage</h3>
+                <p class="text-sm text-slate-500">Encrypted history logs every batch with timestamped precision for compliance.</p>
+            </div>
+
+            <div class="p-6 bg-white/60 backdrop-blur-sm rounded-xl border border-slate-100 shadow-sm hover:shadow-md transition-all hover:border-pale-sky group">
+                <div class="w-10 h-10 bg-pale-sky/20 text-tech-blue rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                    <span class="material-symbols-sharp">bolt</span>
+                </div>
+                <h3 class="font-bold text-helix-dark mb-2">Fast Processing</h3>
+                <p class="text-sm text-slate-500">Analyze base pair distribution and length metrics in milliseconds.</p>
+            </div>
+        </div>
+
+        <div id="faq" class="w-full mt-32 text-left scroll-mt-24">
+            <h2 class="text-sm font-bold text-slate-400 uppercase tracking-wider mb-8 text-center">Frequently Asked Questions</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="p-8 bg-white/60 backdrop-blur-sm rounded-xl border border-slate-100 shadow-sm hover:border-pale-sky transition-colors">
+                    <h3 class="font-bold text-helix-dark text-lg mb-3 flex items-center gap-2">
+                        <span class="text-tech-blue">?</span> What is a DNA?                     </h3>
+                    <p class="text-slate-500 leading-relaxed">
+                        Deoxyribonucleic acid (DNA) is the molecule that carries genetic information for the development and functioning of an organism. It consists of two strands that wind around each other to form a twisted ladder shape known as a double helix.
+                    </p>
+                </div>
+
+                <div class="p-8 bg-white/60 backdrop-blur-sm rounded-xl border border-slate-100 shadow-sm hover:border-pale-sky transition-colors">
+                    <h3 class="font-bold text-helix-dark text-lg mb-3 flex items-center gap-2">
+                        <span class="text-tech-blue">?</span> What is Helixpace?
+                    </h3>
+                    <p class="text-slate-500 leading-relaxed">
+                        Helixpace is a specialized digital terminal designed for modern labs to input, validate, and analyze nucleotide sequences. It ensures data integrity by filtering raw inputs and providing instant metric analysis for batch processing.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="w-full py-6 border-t border-slate-100 bg-white/80 backdrop-blur-md relative z-10 shrink-0">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
+            <p class="text-xs text-slate-400 font-mono">© 2025 HELIXPACE LABS. ENCRYPTED.</p>
+            <div class="flex items-center gap-6">
+                <a href="#" class="text-xs font-medium text-slate-400 hover:text-tech-blue transition-colors">PRIVACY</a>
+                <a href="#" class="text-xs font-medium text-slate-400 hover:text-tech-blue transition-colors">TERMS</a>
+                <a href="#" class="text-xs font-medium text-slate-400 hover:text-tech-blue transition-colors">CONTACT</a>
+            </div>
+        </div>
+    </footer>
+    
+    <script type="module" src="/src/main.js"></script>
+</body>
+</html>

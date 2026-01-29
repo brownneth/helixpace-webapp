@@ -1,0 +1,1 @@
+console.log('Helixpace App Initialized');

@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@24,400,0,0');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    @apply font-sans text-helix-dark antialiased;
+}
+
+main {
+    animation: app-enter 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes app-enter {
+    0% {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.btn-primary {
+    @apply h-12 px-8 bg-tech-blue text-white font-semibold rounded-md hover:bg-pale-sky hover:text-tech-blue transition-all shadow-md shadow-blue-500/20 flex items-center justify-center gap-2 cursor-pointer;
+}
+
+.input-field {
+    @apply w-full h-11 px-3 bg-surface-gray border border-slate-200 rounded-md font-mono text-sm text-helix-dark focus:outline-none focus:bg-white focus:border-tech-blue focus:ring-1 focus:ring-tech-blue transition-all;
+}

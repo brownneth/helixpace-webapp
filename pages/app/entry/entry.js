@@ -1,8 +1,9 @@
 import { Sidebar } from '/src/components/Sidebar.js';
 import { AppNavbar } from '/src/components/AppNavbar.js';
 import { validateSequence } from '/src/utils/dna.js';
+import { request } from '/src/api/client.js'; 
 
-document.getElementById('sidebar-mount').innerHTML = Sidebar('entry'); 
+document.getElementById('sidebar-mount').innerHTML = Sidebar('entry');
 document.getElementById('navbar-mount').innerHTML = AppNavbar('New Sequence');
 
 const input = document.getElementById('dna-input');
@@ -27,6 +28,28 @@ btnClear.addEventListener('click', () => {
     charCount.innerText = '0';
     updateVisuals('empty');
     input.focus();
+});
+btnAnalyze.addEventListener('click', async () => {
+    const sequence = input.value;
+    
+    btnAnalyze.innerText = "Processing...";
+    btnAnalyze.disabled = true;
+
+    try {
+   
+        const result = await request('/api/sequence/analyze', {
+            method: 'POST',
+            body: JSON.stringify({ sequence_data: sequence })
+        });
+
+        alert(`Analysis Complete!\nLength: ${result.length}\nGC Content: ${result.gc_content}%`);
+        window.location.href = '/pages/app/results/index.html';
+
+    } catch (err) {
+        alert("Error: " + err.message);
+        btnAnalyze.innerText = "Run Analysis";
+        btnAnalyze.disabled = false;
+    }
 });
 
 function updateVisuals(status) {

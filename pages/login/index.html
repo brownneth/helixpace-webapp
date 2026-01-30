@@ -37,10 +37,10 @@
                 <p id="header-desc" class="text-slate-500">Enter your credentials to access the terminal.</p>
             </div>
 
-            <div id="form-login" class="flex flex-col gap-5 transition-opacity duration-200">
+            <form id="form-login" class="flex flex-col gap-5 transition-opacity duration-200">
                 <div class="space-y-1.5">
                     <label class="text-xs font-bold text-slate-900 uppercase tracking-wide">Email</label>
-                    <input type="email" placeholder="researcher@lab.org" class="input-field">
+                    <input id="login-email" type="email" placeholder="researcher@lab.org" class="input-field" required>
                 </div>
 
                 <div class="space-y-1.5">
@@ -48,36 +48,43 @@
                         <label class="text-xs font-bold text-slate-900 uppercase tracking-wide">Password</label>
                         <a href="#" class="text-xs font-medium text-slate-400 hover:text-tech-blue transition-colors">Forgot?</a>
                     </div>
-                    <input type="password" placeholder="••••••••••••" class="input-field">
+                    <input id="login-password" type="password" placeholder="••••••••••••" class="input-field" required>
                 </div>
 
-                <a href="/pages/app/entry/index.html" class="h-12 w-full bg-tech-blue text-white font-semibold rounded-md hover:bg-pale-sky hover:text-tech-blue transition-all shadow-md shadow-blue-500/20 mt-2 flex items-center justify-center gap-2 group">
+                <button type="submit" class="h-12 w-full bg-tech-blue text-white font-semibold rounded-md hover:bg-pale-sky hover:text-tech-blue transition-all shadow-md shadow-blue-500/20 mt-2 flex items-center justify-center gap-2 group cursor-pointer">
                     Sign In
                     <span class="material-symbols-sharp text-[18px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
-                </a>
-            </div>
+                </button>
+            </form>
 
-            <div id="form-signup" class="hidden flex-col gap-5 transition-opacity duration-200">
+            <form id="form-signup" class="hidden flex-col gap-5 transition-opacity duration-200">
                 <div class="space-y-1.5">
                     <label class="text-xs font-bold text-slate-900 uppercase tracking-wide">Full Name</label>
-                    <input type="text" placeholder="Dr. Sarah Chen" class="input-field">
+                    <input id="signup-name" type="text" placeholder="Dr. Sarah Chen" class="input-field" required>
                 </div>
 
                 <div class="space-y-1.5">
                     <label class="text-xs font-bold text-slate-900 uppercase tracking-wide">Institutional Email</label>
-                    <input type="email" placeholder="researcher@lab.org" class="input-field">
+                    <input id="signup-email" type="email" placeholder="researcher@lab.org" class="input-field" required>
                 </div>
                 
                 <div class="space-y-1.5">
-                    <label class="text-xs font-bold text-slate-900 uppercase tracking-wide">Lab Code</label>
-                    <input type="text" placeholder="LAB-XXXX" class="input-field">
+                    <label class="text-xs font-bold text-slate-900 uppercase tracking-wide">Password</label>
+                    <input id="signup-password" type="password" placeholder="Create a password" class="input-field" required>
                 </div>
 
-                <a href="/pages/app/entry/index.html" class="h-12 w-full bg-tech-blue text-white font-semibold rounded-md hover:bg-pale-sky hover:text-tech-blue transition-all shadow-md shadow-blue-500/20 mt-2 flex items-center justify-center gap-2 group">
+                <div class="space-y-1.5">
+                    <label class="text-xs font-bold text-slate-900 uppercase tracking-wide">Lab Code</label>
+                    <input id="signup-labcode" type="text" placeholder="LAB-XXXX" class="input-field" required>
+                </div>
+
+                <button type="submit" class="h-12 w-full bg-tech-blue text-white font-semibold rounded-md hover:bg-pale-sky hover:text-tech-blue transition-all shadow-md shadow-blue-500/20 mt-2 flex items-center justify-center gap-2 group cursor-pointer">
                     Create Account
                     <span class="material-symbols-sharp text-[18px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
-                </a>
-            </div>
+                </button>
+            </form>
+            
+            <p id="error-msg" class="text-center text-xs text-error-red font-bold hidden"></p>
         </div>
     </main>
 

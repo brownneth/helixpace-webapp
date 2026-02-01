@@ -1,5 +1,9 @@
 export function AppNavbar(pageTitle) {
-    const userName = localStorage.getItem('helixpace_user_name') || 'Researcher';
+    let userName = localStorage.getItem('helixpace_user_name');
+    if (!userName || userName === 'undefined' || userName === 'null') {
+        userName = 'Researcher';
+    }
+    
     const firstInitial = userName.charAt(0).toUpperCase();
 
     return `
@@ -19,7 +23,8 @@ export function AppNavbar(pageTitle) {
                     <div class="text-sm font-bold text-helix-dark">${userName}</div>
                     <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">BIOMED YEAR 5 LABS</div>
                 </div>
-                <div class="w-9 h-9 rounded-full bg-gradient-to-br from-tech-blue to-pale-sky text-white flex items-center justify-center font-bold text-xs shadow-md shadow-blue-500/20">
+                
+                <div class="w-9 h-9 rounded-full bg-surface-gray border border-slate-200 text-slate-600 flex items-center justify-center font-bold text-xs">
                     ${firstInitial}
                 </div>
             </div>

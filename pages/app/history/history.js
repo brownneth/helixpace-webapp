@@ -23,32 +23,51 @@ async function initHistory() {
 
     } catch (err) {
         console.error(err);
-        tableContainer.innerHTML = `<div class="p-8 text-center text-error-red text-sm font-bold">Failed to load history.</div>`;
+        tableContainer.innerHTML = `<div class="p-8 text-center text-error-red text-sm font-bold">Failed to load system logs.</div>`;
     }
 }
+
 function renderTable(sequences) {
     if (sequences.length === 0) {
-        tableContainer.innerHTML = `<div class="p-8 text-center text-slate-400 text-sm">No sequences found matching your criteria.</div>`;
+        tableContainer.innerHTML = `<div class="p-12 text-center text-slate-400 text-xs font-mono uppercase tracking-wider">No matching records found</div>`;
         return;
     }
 
-    const rows = sequences.map(seq => `
-        <div class="h-16 border-b border-slate-100 flex items-center px-6 hover:bg-slate-50 transition-colors group cursor-pointer">
-            <div class="w-28 text-xs text-slate-500 font-medium">${new Date(seq.created_at).toLocaleDateString()}</div>
-            <div class="w-24 font-mono text-xs font-bold text-tech-blue">#SEQ-${seq.id}</div>
-            <div class="flex-1 pr-8">
-                <div class="text-xs font-bold text-helix-dark">Batch Analysis</div>
-                <div class="text-[10px] text-slate-400 truncate max-w-[200px] font-mono">${seq.sequence}</div>
+    const rows = sequences.map(seq => {
+        const projectName = seq.description || "Untitled Batch";
+        
+        return `
+        <div class="lab-row group">
+            <div class="w-32 lab-col text-xs text-slate-500 font-medium">
+                ${new Date(seq.created_at).toLocaleDateString()}
             </div>
-            <div class="w-24 font-mono text-xs text-slate-600 text-right">${seq.gc_content}% GC</div>
-            <div class="w-24 pl-4">
-                    <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-success-green/10 text-success-green text-[10px] font-bold border border-success-green/20">COMPLETE</span>
+            
+            <div class="w-32 lab-col">
+                <span class="data-id">#SEQ-${seq.id}</span>
             </div>
-            <div class="w-16 flex justify-end opacity-0 group-hover:opacity-100 transition-opacity">
-                <button class="p-1.5 text-slate-400 hover:text-tech-blue hover:bg-blue-50 rounded transition-colors"><span class="material-symbols-sharp text-[18px]">arrow_forward</span></button>
+
+            <div class="w-48 lab-col">
+                <span class="text-xs font-bold text-slate-700 truncate">${projectName}</span>
+            </div>
+
+            <div class="flex-1 lab-col">
+                <div class="data-mono text-slate-400 truncate max-w-[300px] opacity-70 group-hover:opacity-100">
+                    ${seq.sequence}
+                </div>
+            </div>
+
+            <div class="w-24 lab-col justify-end">
+                <span class="data-mono">${seq.gc_content}%</span>
+            </div>
+
+            <div class="w-32 lab-col pl-6">
+                <div class="status-indicator status-complete">
+                    <div class="status-dot"></div>
+                    <span>PROCESSED</span>
+                </div>
             </div>
         </div>
-    `).join('');
+    `}).join('');
 
     tableContainer.innerHTML = rows;
 }
@@ -58,8 +77,10 @@ searchInput.addEventListener('input', (e) => {
         const idMatch = seq.id.toString().includes(term);
         const seqMatch = seq.sequence.toLowerCase().includes(term);
         const dateMatch = new Date(seq.created_at).toLocaleDateString().toLowerCase().includes(term);
+        
+        const descMatch = (seq.description || "Untitled Batch").toLowerCase().includes(term);
 
-        return idMatch || seqMatch || dateMatch;
+        return idMatch || seqMatch || dateMatch || descMatch;
     });
 
     renderTable(filtered);

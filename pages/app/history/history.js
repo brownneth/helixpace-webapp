@@ -10,14 +10,17 @@ const tableContainer = document.getElementById('history-table-body');
 const searchInput = document.getElementById('history-search');
 
 let allSequences = [];
-async function initHistory() {s
+
+async function initHistory() {
     if (!auth.isAuthenticated()) {
         window.location.href = '/pages/login/index.html';
         return;
     }
     try {
         const response = await request('/sequences/me');
-        const data = response.data;
+        const data = response.data; 
+        console.log("History Fetched:", data);
+
         if (!data || data.length === 0) {
             renderTable([]);
             return;
@@ -45,11 +48,19 @@ function renderTable(sequences) {
 
     const rows = sequences.map(seq => {
         const projectName = seq.description || "Untitled Batch";
+        let dateStr = "Unknown Date";
+        try {
+            if (seq.created_at) {
+                dateStr = new Date(seq.created_at).toLocaleDateString();
+            }
+        } catch (e) {
+            console.warn("Date parse error for ID:", seq.id);
+        }
         
         return `
         <div class="lab-row group">
             <div class="w-32 lab-col text-xs text-slate-500 font-medium">
-                ${new Date(seq.created_at).toLocaleDateString()}
+                ${dateStr}
             </div>
             
             <div class="w-32 lab-col">
@@ -87,7 +98,12 @@ searchInput.addEventListener('input', (e) => {
     const filtered = allSequences.filter(seq => {
         const idMatch = seq.id.toString().includes(term);
         const seqMatch = seq.sequence.toLowerCase().includes(term);
-        const dateMatch = new Date(seq.created_at).toLocaleDateString().toLowerCase().includes(term);
+        
+        let dateMatch = false;
+        if (seq.created_at) {
+            dateMatch = new Date(seq.created_at).toLocaleDateString().toLowerCase().includes(term);
+        }
+
         const descMatch = (seq.description || "Untitled Batch").toLowerCase().includes(term);
 
         return idMatch || seqMatch || dateMatch || descMatch;

@@ -29,13 +29,19 @@ export async function request(endpoint, options = {}) {
 
     try {
         const response = await fetch(url, config);
-        const data = await response.json();
-
-        if (!response.ok) {
-            throw new Error(data.message || 'API request failed');
+        const contentType = response.headers.get("content-type");
+        if (contentType && contentType.indexOf("application/json") !== -1) {
+            const data = await response.json();
+            if (!response.ok) {
+                throw new Error(data.message || 'API request failed');
+            }
+            return data;
+        } else {
+            const text = await response.text();
+            console.error("Non-JSON Response:", text); 
+            throw new Error(`Server Error (${response.status}): The backend returned HTML instead of JSON. Check Render logs.`);
         }
 
-        return data;
     } catch (error) {
         console.error('API Error:', error);
         throw error;

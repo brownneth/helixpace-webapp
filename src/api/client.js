@@ -10,12 +10,15 @@ export const auth = {
 };
 
 export async function request(endpoint, options = {}) {
-    const url = `${API_BASE_URL}${endpoint}`;
+    let url = `${API_BASE_URL}${endpoint}`;
+
+    if (!options.method || options.method.toUpperCase() === 'GET') {
+        const separator = url.includes('?') ? '&' : '?';
+        url += `${separator}_t=${new Date().getTime()}`;
+    }
+    
     const headers = {
         'Content-Type': 'application/json',
-        'Cache-Control': 'no-cache, no-store, must-revalidate',
-        'Pragma': 'no-cache',
-        'Expires': '0',
         ...options.headers,
     };
 
@@ -45,6 +48,7 @@ export async function request(endpoint, options = {}) {
             }
             return data;
         } else {
+            // It's HTML (likely a 404 or 500 from Render)
             const text = await response.text();
             console.error("Non-JSON Response:", text); 
             throw new Error(`Server Error (${response.status}): The backend returned HTML instead of JSON.`);

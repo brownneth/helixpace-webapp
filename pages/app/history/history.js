@@ -9,7 +9,7 @@ const tableContainer = document.querySelector('.flex-1.overflow-auto');
 
 async function loadHistory() {
     try {
-        const sequences = await request('/api/sequence/history');
+        const sequences = await request('/sequence/history');
 
         if (sequences.length === 0) {
             tableContainer.innerHTML = `<div class="p-8 text-center text-slate-400 text-sm">No analysis history found.</div>`;

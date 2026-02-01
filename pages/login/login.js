@@ -45,6 +45,11 @@ formLogin.addEventListener('submit', async (e) => {
         });
 
         auth.setToken(data.access_token);
+        if (data.user) {
+            const fullName = `${data.user.firstname} ${data.user.lastname}`;
+            localStorage.setItem('helixpace_user_name', fullName);
+        }
+
         window.location.href = '/pages/app/entry/index.html';
 
     } catch (err) {

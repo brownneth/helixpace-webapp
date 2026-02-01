@@ -37,7 +37,7 @@ btnAnalyze.addEventListener('click', async () => {
 
     try {
    
-        const result = await request('/api/sequence/analyze', {
+        const result = await request('/sequence/analyze', {
             method: 'POST',
             body: JSON.stringify({ sequence_data: sequence })
         });

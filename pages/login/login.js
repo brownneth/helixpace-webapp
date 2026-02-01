@@ -13,10 +13,8 @@ function switchTab(tab) {
     if (tab === 'login') {
         btnLoginTab.className = "px-6 py-1.5 text-sm font-semibold rounded-md shadow-sm bg-white text-tech-blue transition-all";
         btnSignupTab.className = "px-6 py-1.5 text-sm font-medium rounded-md text-slate-500 hover:text-tech-blue transition-all";
-        
         title.innerText = "Welcome back.";
         desc.innerText = "Enter your credentials to access the terminal.";
-
         formLogin.classList.remove('hidden');
         formLogin.classList.add('flex');
         formSignup.classList.add('hidden');
@@ -24,10 +22,8 @@ function switchTab(tab) {
     } else {
         btnSignupTab.className = "px-6 py-1.5 text-sm font-semibold rounded-md shadow-sm bg-white text-tech-blue transition-all";
         btnLoginTab.className = "px-6 py-1.5 text-sm font-medium rounded-md text-slate-500 hover:text-tech-blue transition-all";
-
         title.innerText = "New Account";
         desc.innerText = "Register your lab credentials for access.";
-
         formSignup.classList.remove('hidden');
         formSignup.classList.add('flex');
         formLogin.classList.add('hidden');
@@ -43,13 +39,12 @@ formLogin.addEventListener('submit', async (e) => {
     const password = document.getElementById('login-password').value;
 
     try {
-
-        const data = await request('/api/auth/login', {
+        const data = await request('/auth/login', {
             method: 'POST',
             body: JSON.stringify({ email, password })
         });
 
-        auth.setToken(data.token);
+        auth.setToken(data.access_token);
         window.location.href = '/pages/app/entry/index.html';
 
     } catch (err) {
@@ -57,19 +52,25 @@ formLogin.addEventListener('submit', async (e) => {
         errorMsg.classList.remove('hidden');
     }
 });
-
 formSignup.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const name = document.getElementById('signup-name').value;
+    const fullName = document.getElementById('signup-name').value;
     const email = document.getElementById('signup-email').value;
     const password = document.getElementById('signup-password').value;
-    const lab_code = document.getElementById('signup-labcode').value;
+    const lab_code = document.getElementById('signup-labcode').value; 
+    const nameParts = fullName.trim().split(' ');
+    const firstname = nameParts[0];
+    const lastname = nameParts.slice(1).join(' ') || ''; 
 
     try {
-
-        await request('/api/auth/register', {
+        await request('/auth/register', {
             method: 'POST',
-            body: JSON.stringify({ name, email, password, lab_code })
+            body: JSON.stringify({ 
+                email, 
+                password, 
+                firstname, 
+                lastname 
+            })
         });
 
         alert('Account created! Please log in.');

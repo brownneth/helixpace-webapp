@@ -1,10 +1,11 @@
 import { Sidebar } from '/src/components/Sidebar.js';
-import { AppNavbar } from '/src/components/AppNavbar.js';
+import { AppNavbar, setupNavbarListeners } from '/src/components/AppNavbar.js';
 import { validateSequence } from '/src/utils/dna.js';
 import { request } from '/src/api/client.js'; 
 
 document.getElementById('sidebar-mount').innerHTML = Sidebar('entry');
 document.getElementById('navbar-mount').innerHTML = AppNavbar('New Sequence');
+setupNavbarListeners();
 
 const input = document.getElementById('dna-input');
 const statusText = document.getElementById('status-text');
@@ -42,7 +43,8 @@ btnAnalyze.addEventListener('click', async () => {
         });
         const result = response.data;
 
-        alert(`Analysis Complete!\nLength: ${result.length}\nGC Content: ${result.gc_content}%`);
+        localStorage.setItem('helixpace_last_result', JSON.stringify(result));
+
         window.location.href = '/pages/app/results/index.html';
 
     } catch (err) {

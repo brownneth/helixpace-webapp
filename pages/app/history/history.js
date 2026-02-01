@@ -1,6 +1,6 @@
 import { Sidebar } from '/src/components/Sidebar.js';
 import { AppNavbar, setupNavbarListeners } from '/src/components/AppNavbar.js';
-import { request } from '/src/api/client.js';
+import { request, auth } from '/src/api/client.js';
 
 document.getElementById('sidebar-mount').innerHTML = Sidebar('history');
 document.getElementById('navbar-mount').innerHTML = AppNavbar('Search History');
@@ -10,7 +10,11 @@ const tableContainer = document.getElementById('history-table-body');
 const searchInput = document.getElementById('history-search');
 
 let allSequences = [];
-async function initHistory() {
+async function initHistory() {s
+    if (!auth.isAuthenticated()) {
+        window.location.href = '/pages/login/index.html';
+        return;
+    }
     try {
         const response = await request('/sequences/me');
         const data = response.data;
@@ -23,7 +27,13 @@ async function initHistory() {
 
     } catch (err) {
         console.error(err);
-        tableContainer.innerHTML = `<div class="p-8 text-center text-error-red text-sm font-bold">Failed to load system logs.</div>`;
+        tableContainer.innerHTML = `<div class="p-8 text-center text-error-red text-sm font-bold">Error: ${err.message}</div>`;
+        
+        if (err.message.includes('401') || err.message.includes('Unauthorized')) {
+            setTimeout(() => {
+                window.location.href = '/pages/login/index.html';
+            }, 2000);
+        }
     }
 }
 
@@ -73,11 +83,11 @@ function renderTable(sequences) {
 }
 searchInput.addEventListener('input', (e) => {
     const term = e.target.value.toLowerCase();
+
     const filtered = allSequences.filter(seq => {
         const idMatch = seq.id.toString().includes(term);
         const seqMatch = seq.sequence.toLowerCase().includes(term);
         const dateMatch = new Date(seq.created_at).toLocaleDateString().toLowerCase().includes(term);
-        
         const descMatch = (seq.description || "Untitled Batch").toLowerCase().includes(term);
 
         return idMatch || seqMatch || dateMatch || descMatch;
@@ -85,4 +95,5 @@ searchInput.addEventListener('input', (e) => {
 
     renderTable(filtered);
 });
+
 initHistory();

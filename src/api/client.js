@@ -33,13 +33,19 @@ export async function request(endpoint, options = {}) {
         if (contentType && contentType.indexOf("application/json") !== -1) {
             const data = await response.json();
             if (!response.ok) {
-                throw new Error(data.message || 'API request failed');
+                const errorMessage = data.message || data.msg || 'API request failed';
+                if (response.status === 401 || response.status === 422) {
+                    console.warn("Session expired. Logging out.");
+                    auth.clearToken();
+                }
+                
+                throw new Error(errorMessage);
             }
             return data;
         } else {
             const text = await response.text();
             console.error("Non-JSON Response:", text); 
-            throw new Error(`Server Error (${response.status}): The backend returned HTML instead of JSON. Check Render logs.`);
+            throw new Error(`Server Error (${response.status}): The backend returned HTML instead of JSON.`);
         }
 
     } catch (error) {

@@ -21,51 +21,28 @@
                     <div class="flex items-center gap-3">
                         <div class="relative flex-1 group">
                             <span class="material-symbols-sharp absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-tech-blue transition-colors">search</span>
-                            <input type="text" placeholder="Search by Sequence ID, Tags, or Date..." class="w-full h-12 pl-12 pr-4 bg-white border border-slate-200 rounded-lg shadow-sm font-mono text-sm focus:outline-none focus:border-tech-blue focus:ring-1 focus:ring-tech-blue transition-all">
+                            <input id="history-search" type="text" placeholder="Search by Sequence ID, Content, or Date..." class="w-full h-12 pl-12 pr-4 bg-white border border-slate-200 rounded-lg shadow-sm font-mono text-sm focus:outline-none focus:border-tech-blue focus:ring-1 focus:ring-tech-blue transition-all">
                         </div>
-                        <div class="bg-white border border-slate-200 rounded-lg h-12 flex items-center p-1 shadow-sm">
-                            <button class="px-4 h-full bg-surface-gray text-helix-dark text-xs font-bold rounded-md shadow-sm transition-all">All</button>
-                            <button class="px-4 h-full text-slate-500 hover:bg-slate-50 text-xs font-medium rounded-md transition-all">Flagged</button>
-                        </div>
+                        <button class="h-12 px-6 bg-white border border-slate-200 text-slate-600 font-semibold rounded-lg hover:border-slate-300 hover:text-helix-dark transition-colors flex items-center gap-2">
+                            <span class="material-symbols-sharp text-[18px]">tune</span>
+                            Filters
+                        </button>
                     </div>
                 </div>
 
-                <div class="flex-1 flex flex-col gap-4 min-h-0">
-                    <div class="flex items-center justify-between shrink-0">
-                         <h2 class="text-xs font-bold text-slate-500 uppercase tracking-wide flex items-center gap-2">
-                            <span class="material-symbols-sharp text-[16px]">history</span>
-                            Recently Saved
-                        </h2>
+                <div class="bg-white rounded-xl shadow-card border border-slate-200 flex-1 flex flex-col overflow-hidden">
+                    <div class="h-10 bg-surface-gray border-b border-slate-200 flex items-center px-6 shrink-0">
+                        <div class="w-28 text-[10px] font-bold text-slate-500 uppercase tracking-wider">Date</div>
+                        <div class="w-24 text-[10px] font-bold text-slate-500 uppercase tracking-wider">ID</div>
+                        <div class="flex-1 text-[10px] font-bold text-slate-500 uppercase tracking-wider">Sequence Preview</div>
+                        <div class="w-24 text-[10px] font-bold text-slate-500 uppercase tracking-wider text-right">GC %</div>
+                        <div class="w-24 pl-4 text-[10px] font-bold text-slate-500 uppercase tracking-wider">Status</div>
+                        <div class="w-16"></div>
                     </div>
 
-                    <div class="bg-white rounded-xl shadow-card border border-slate-200 flex-1 flex flex-col overflow-hidden relative">
-                        <div class="h-10 bg-surface-gray border-b border-slate-200 flex items-center px-6 shrink-0">
-                            <div class="w-28 text-[10px] font-bold text-slate-500 uppercase tracking-wider">Date Saved</div>
-                            <div class="w-24 text-[10px] font-bold text-slate-500 uppercase tracking-wider">ID</div>
-                            <div class="flex-1 text-[10px] font-bold text-slate-500 uppercase tracking-wider">Description</div>
-                            <div class="w-24 text-[10px] font-bold text-slate-500 uppercase tracking-wider pl-4">Status</div>
-                            <div class="w-16"></div>
+                    <div id="history-table-body" class="flex-1 overflow-auto">
                         </div>
-
-                        <div class="flex-1 overflow-auto">
-                            <div class="h-16 border-b border-slate-100 flex items-center px-6 hover:bg-slate-50 transition-colors group cursor-pointer">
-                                <div class="w-28 text-xs text-slate-500 font-medium">Oct 24, 10:42</div>
-                                <div class="w-24 font-mono text-xs font-bold text-tech-blue">#SEQ-001</div>
-                                <div class="flex-1 pr-8">
-                                    <div class="text-xs font-bold text-helix-dark">Batch 42 Analysis</div>
-                                    <div class="text-[10px] text-slate-400 truncate">Initial sequencing...</div>
-                                </div>
-                                <div class="w-24 pl-4">
-                                     <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-success-green/10 text-success-green text-[10px] font-bold border border-success-green/20">COMPLETE</span>
-                                </div>
-                                <div class="w-16 flex justify-end opacity-0 group-hover:opacity-100 transition-opacity">
-                                    <button class="p-1.5 text-slate-400 hover:text-tech-blue hover:bg-blue-50 rounded transition-colors"><span class="material-symbols-sharp text-[18px]">arrow_forward</span></button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
-
             </div>
         </main>
     </div>

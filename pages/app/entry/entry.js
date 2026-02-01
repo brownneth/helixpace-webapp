@@ -36,11 +36,11 @@ btnAnalyze.addEventListener('click', async () => {
     btnAnalyze.disabled = true;
 
     try {
-   
-        const result = await request('/sequence/analyze', {
+        const response = await request('/sequences', {
             method: 'POST',
-            body: JSON.stringify({ sequence_data: sequence })
+            body: JSON.stringify({ sequence: sequence })
         });
+        const result = response.data;
 
         alert(`Analysis Complete!\nLength: ${result.length}\nGC Content: ${result.gc_content}%`);
         window.location.href = '/pages/app/results/index.html';
